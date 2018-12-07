@@ -24,7 +24,7 @@
 
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
-    <table class="layui-table layui-form">
+    <table class="layui-table >
         {{csrf_field()}}
         <thead>
         <tr>
