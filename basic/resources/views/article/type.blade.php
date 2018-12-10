@@ -13,9 +13,10 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so layui-form-pane">
-            <input class="layui-input" placeholder="分类名" name="cate_name">
-            <a href="http://www.basic.com/nav/insert" class="layui-btn">增加</a>
+        <form class="layui-form layui-col-md12 x-so layui-form-pane" action="insert" method="post" >
+            {{csrf_field()}}
+            <input class="layui-input" placeholder="分类名" name="new_type">
+            <input type="submit" value="添加" class="layui-btn">
         </form>
     </div>
     <xblock>
@@ -29,30 +30,24 @@
     </xblock>
     <table class="layui-table >
         {{csrf_field()}}
-        <thead>
-        <tr>
-            <th width="20">
-                <input type="checkbox" ></th>
-            <th width="70">ID</th>
-            <th>导航名</th>
-            <th width="50">父ID</th>
-            <th width="50">URL</th>
-            <th width="220">操作</th>
-        </thead>
-        @foreach($list as $v)
+            <thead>
+                <tr>
+                <th width="20"><input type="checkbox" ></th>
+                <th width="70">ID</th>
+                <th>资讯分类</th>
+                <th width="220">操作</th>
+            </thead>
+    @foreach($type as $v)
         <tr  >
             <td ><input type="checkbox" value="{{$v->id}}" class="in"></td>
             <td>{{$v->id}}</td>
-            <td><a href="">{{str_repeat("--|",$v->level)}}{{$v->name}}</a></td>
-            <td>{{$v->pid}}</td>
-            <td>{{$v->url}}</td>
+            <td>{{$v->new_type}}</td>
             <td class="td-manage">
-                <a href="edit{{$v->id}}" class="layui-btn layui-btn">编辑</a>
                 <a href="delete{{$v->id}}" class=" layui-btn layui-btn-danger">删除</a>
             </td>
         </tr>
-        @endforeach
-    </table>
+    @endforeach
+        </table>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -104,9 +99,5 @@
             })
         })
     });
-
-
-
-
 </script>
 

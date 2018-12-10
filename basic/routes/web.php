@@ -27,16 +27,28 @@ Route::group(['middleware' => 'check.login'], function(){
 	Route::any('adminDel',"Admin\AdminController@delAdmin");//管理员删除
 	Route::any('adminEdit',"Admin\AdminController@adminEdit");//管理员修改
 });
-
+//导航栏管理
 Route::group(['prefix'=>'nav'], function(){
     Route::get('index',"Admin\NavController@index");//列表展示
-    Route::any('insert',"Admin\NavController@insert");
-    Route::any('delete{id?}',"Admin\NavController@delete");
-    Route::get('edit{id?}',"Admin\NavController@edit");
-    Route::any('doEdit',"Admin\NavController@doEdit");
-    Route::any('checkdel',"Admin\NavController@checkdel");
+    Route::any('insert',"Admin\NavController@insert");//添加导航名称
+    Route::any('delete{id?}',"Admin\NavController@delete");//删除导航名称
+    Route::get('edit{id?}',"Admin\NavController@edit");//跳转修改页面
+    Route::any('doEdit',"Admin\NavController@doEdit");//执行修改
+    Route::any('checkdel',"Admin\NavController@checkdel");//执行批量删除
+});
 
+Route::group(['prefix'=>'article'], function(){
+    Route::get('type',"Admin\ArticleController@type");//分类展示
+    Route::any('insert',"Admin\ArticleController@insert");//分类添加
+    Route::any('delete{id?}',"Admin\ArticleController@delete");//分类删除
+
+    Route::get('index',"Admin\ArticleController@index");
+    Route::any('store',"Admin\ArticleController@store");
+    Route::any('del{id?}',"Admin\ArticleController@del");
 
 });
+
+
+
 
 

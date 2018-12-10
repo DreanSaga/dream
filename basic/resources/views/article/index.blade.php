@@ -15,7 +15,7 @@
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so layui-form-pane">
             <input class="layui-input" placeholder="分类名" name="cate_name">
-            <a href="http://www.basic.com/nav/insert" class="layui-btn">增加</a>
+            <a href="http://www.basic.com/article/store" class="layui-btn">增加</a>
         </form>
     </div>
     <xblock>
@@ -34,21 +34,26 @@
             <th width="20">
                 <input type="checkbox" ></th>
             <th width="70">ID</th>
-            <th>导航名</th>
-            <th width="50">父ID</th>
-            <th width="50">URL</th>
+            <th>文章标题</th>
+            <th width="50">文章分类</th>
+            <th width="50">添加时间</th>
             <th width="220">操作</th>
         </thead>
         @foreach($list as $v)
         <tr  >
             <td ><input type="checkbox" value="{{$v->id}}" class="in"></td>
             <td>{{$v->id}}</td>
-            <td><a href="">{{str_repeat("--|",$v->level)}}{{$v->name}}</a></td>
-            <td>{{$v->pid}}</td>
-            <td>{{$v->url}}</td>
+            <td><a href="">{{$v->new_name}}</a></td>
+            <td>
+                @foreach($pe as $value)
+                    @if($v->new_type==$value->id)
+                        {{$value->new_type}}
+                        @endif
+                    @endforeach
+            <td>{{$v->start_time}}</td>
             <td class="td-manage">
                 <a href="edit{{$v->id}}" class="layui-btn layui-btn">编辑</a>
-                <a href="delete{{$v->id}}" class=" layui-btn layui-btn-danger">删除</a>
+                <a href="del{{$v->id}}" class=" layui-btn layui-btn-danger">删除</a>
             </td>
         </tr>
         @endforeach
