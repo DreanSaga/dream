@@ -12,7 +12,7 @@ class NavController extends Controller
     //展示
     public function index(){
         $assign['list'] = navModel::showType();
-        return view("Nav.index",$assign);
+        return view("nav.index",$assign);
     }
     //执行添加
     public function insert(Request $request){
@@ -26,7 +26,7 @@ class NavController extends Controller
                 return redirect("nav/index");
             }
         }else{
-            return view("Nav.add");
+            return view("nav.add");
         }
     }
     //执行删除
@@ -36,7 +36,7 @@ class NavController extends Controller
     }
 
     //跳转修改页面
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
         $assign["list"] = navModel::where('id', $id)->first();
         return view('nav.edit', $assign);
@@ -71,4 +71,6 @@ class NavController extends Controller
             ];
         }
     }
+
+
 }

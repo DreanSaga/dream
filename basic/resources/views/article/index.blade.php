@@ -15,7 +15,7 @@
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so layui-form-pane">
             <input class="layui-input" placeholder="分类名" name="cate_name">
-            <a href="http://www.basic.com/article/store" class="layui-btn">增加</a>
+            <a href="{{url("article/store")}}" class="layui-btn">增加</a>
         </form>
     </div>
     <xblock>
@@ -31,8 +31,7 @@
         {{csrf_field()}}
         <thead>
         <tr>
-            <th width="20">
-                <input type="checkbox" ></th>
+            <th width="20"></th>
             <th width="70">ID</th>
             <th>文章标题</th>
             <th width="50">文章分类</th>

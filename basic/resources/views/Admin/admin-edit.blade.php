@@ -4,7 +4,7 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form" method="post" action="{{url('adminEdit')}}">
+        <form  method="post" action="{{url('adminEdit')}}">
           {{csrf_field()}}
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -19,6 +19,17 @@
               </div>
           </div>
      
+         
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>请选择角色
+              </label>
+              
+                @foreach($role['dataList'] as $k => $v)
+                  <input type="checkbox"  name="role_name[]"  value="{{$v->rid}}" @if($info->rid==$v->rid) checked @endif>{{$v->role_name}}
+                 @endforeach 
+              
+              
+       
        <input type="hidden" name="id" value="@if(isset($info)) {{$info->id}} @endif">
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
@@ -42,13 +53,9 @@
                   autocomplete="off" class="layui-input">
               </div>
           </div>
-          <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-              </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  修改
-              </button>
-          </div>
+         
+              <input type="submit" class="layui-btn" lay-filter="add" value="修改">
+         
       </form>
     </div>
   </body>

@@ -32,7 +32,7 @@
         {{csrf_field()}}
             <thead>
                 <tr>
-                <th width="20"><input type="checkbox" ></th>
+                <th width="20"></th>
                 <th width="70">ID</th>
                 <th>资讯分类</th>
                 <th width="220">操作</th>
@@ -41,7 +41,10 @@
         <tr  >
             <td ><input type="checkbox" value="{{$v->id}}" class="in"></td>
             <td>{{$v->id}}</td>
-            <td>{{$v->new_type}}</td>
+            <td  onclick="up({{$v->id}})" >
+                <input type="text" value="{{$v->new_type}}" id="d{{$v->id}}"  onblur="change({{$v->id}})" />
+                <span id="a{{$v->id}}" class="td-manage"></span>
+            </td>
             <td class="td-manage">
                 <a href="delete{{$v->id}}" class=" layui-btn layui-btn-danger">删除</a>
             </td>
@@ -51,6 +54,34 @@
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    //即点及改
+    function up(id){
+        document.getElementById('d'+id).style.display="block";
+        document.getElementById('a'+id).innerHTML="";
+    }
+    function change(id){
+        var new_type=$("#d"+id).val();
+        var _token=$("input[name='_token']").val();
+        $.ajax({
+            url:"change",
+            type:"post",
+            dataType:"json",
+            data:{
+                id:id,
+                _token:_token,
+                new_type:new_type
+            },
+            success:function(e){
+                console.log(e);
+                if(e == 200){
+                    location.reload();
+                }
+            }
+        });
+    }
+
+</script>
 <script type="text/javascript">
     //全选
     $("#all").click(function(){
@@ -66,6 +97,7 @@
             this.checked = !this.checked
         })
     })
+
 
 
 

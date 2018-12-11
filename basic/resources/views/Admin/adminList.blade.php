@@ -12,13 +12,8 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-      <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          {{csrf_field()}}
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
-      </div>
+      
+
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <a class="layui-btn" href='{{url("adminAdd")}}' )"><i class="layui-icon"></i>添加</a> 
@@ -30,7 +25,7 @@
         <thead>
           <tr>
             <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+              <input type="checkbox"  id="selAll" lay-skin="primary">
             </th>
             <th>ID</th>
             <th>登录名</th>
@@ -43,22 +38,19 @@
         @foreach($info['dataList'] as $k => $v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+              <input type="checkbox" lay-skin="primary"  value="{{$v->id}}" name='ids'>
             </td>
             <td>{{$v->id}}</td>
             <td>{{$v->back_user}}</td>
-            <td>@if($v->is_super==1)超级管理员@else管理员@endif</td>
+            <td>{{$v->role_name}}</td>
             <td>{{$v->back_insert_time}}</td>
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">@if($v->back_start_status==1)启用@else禁用@endif</span></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
-              </a>
               <a title="编辑" href="/adminEdit?id={{$v->id}}" >
                 <i class="layui-icon">&#xe642;</i>
               </a>
-<a title="删除"  href="/adminDel?id={{$v->id}}" style="display:@if(Session::get('userinfo')['is_super']==1 & $v->id==1) none @else block @endif">
+<a title="删除"  href="/adminDel?id={{$v->id}}" style="display:@if($v->role_name=='超级管理员') none @else block @endif">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -75,5 +67,23 @@
     </div>
 
   </body>
+  <script src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
 
+  $('#selAll').click(function(){
+    //全选全不选
+      if($(this).is(":checked")){
+        $("input[name='ids']").prop("checked",true);
+      }else{
+        $("input[name='ids']").prop("checked",false);
+      }
+      //获取id
+      /*var str='';
+      $("input[name='ids']").each(function(){
+          if($(this).is(":checked")){
+            str += $(this).val()+','
+          }
+      })*/
+  })
+</script>
 </html>

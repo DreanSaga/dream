@@ -17,7 +17,18 @@
                   <span class="x-red">*</span>将会成为您唯一的登入名
               </div>
           </div>
-     
+       <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>*选择角色
+              </label>
+             
+              <div class="layui-input-inline">
+                 @foreach($role as $k => $v)
+                    <input type="radio"  name="role" value="{{$v->rid}}">{{$v->role_name}}
+                 @endforeach
+              </div>
+            
+          </div>
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>密码
